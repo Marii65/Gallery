@@ -1,7 +1,7 @@
 # 🎨 Galeria de Artes
 
 Uma plataforma para compartilhar e descobrir desenhos e artes digitais.
-O projeto funciona como uma **galeria online **, onde artistas podem publicar suas artes, explorar trabalhos de outros artistas e criar uma comunidade criativa.
+O projeto funciona como uma **galeria online**, onde artistas podem publicar suas artes, explorar trabalhos de outros artistas e criar uma comunidade criativa.
 
 ---
 
