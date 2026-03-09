@@ -1,0 +1,61 @@
+Artistas
+Desenhos
+ADM 
+usuário (artista) 
+
+filtros -------------------------
+🖌️ Técnica
+Digital
+Lápis
+
+🧠 Tipo de desenho
+Original
+Fanart
+Studding
+Sketch
+Comission (encomenda)
+Concept art
+
+🎭 Estilo
+Cartoon
+Furry
+Anime / Mangá
+realista
+Chibi
+Minimalista
+Pixel art
+
+👤 Personagem
+
+Personagem original (OC)
+
+Personagem famoso (anime, filme, jogo)
+
+
+🌍 Tema
+
+Fantasia
+
+Terror
+
+Romance
+
+Sci-fi
+
+Natureza
+
+Urbano
+
+Mitologia
+
+Cotidiano
+
+⏳ Data
+Antigos
+
+Recentes
+
+campos das tabelas ----------------------------------------
+
+
+

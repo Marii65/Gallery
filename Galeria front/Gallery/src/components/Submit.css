@@ -1,0 +1,28 @@
+.submit-btn {
+  background-color: #300021;
+  color: #FFD9F2;
+  border: none;
+  width: 200px;
+  height: 51px;
+  font-size: large;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  font-family: 'Lexend Deca';
+  
+  padding: 15px;
+}
+
+.submit-btn:hover {
+  opacity: 0.9;
+  transform: scale(1.03);
+}
+
+.plus {
+  font-size:xx-large;
+  margin-left: 90px;
+  align-items: center;
+  margin-bottom: 5px;
+}

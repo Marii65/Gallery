@@ -1,0 +1,50 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+.search-wrapper {
+  display: flex;
+  justify-content: center; 
+  padding: 20px;
+}
+
+.search-container {
+  position: relative; 
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;   
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 50px 12px 20px; 
+  border: 3px solid #D76797;    
+  border-radius: 20px;          
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #DC77A2;               
+  outline: none;                
+  background-color: white;
+  transition: all 0.2s ease;
+  opacity: 0.9;
+}
+
+
+.search-input::placeholder {
+  color: #e496b8;
+  opacity: 0.6;
+}
+
+/* O ícone de lupa */
+.search-icon {
+  position: absolute;
+  right: 18px;          
+  color: #D76797;       
+  font-size: 1.2rem;
+  pointer-events: none; 
+}
+
+.search-input:focus {
+  box-shadow: 0 0 10px rgba(228, 150, 184, 0.2);
+  border-color: #d17da1; 
+}

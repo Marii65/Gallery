@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+*{
+    font-family: 'Lexend Deca';
+    color:#DC77A2;
+}
+.login-container{
+display:flex;
+justify-content:center;
+align-items:center;
+height:80vh;
+}
+
+.login-box{
+background-color: rgba(247, 194, 217, 0.8);
+    padding:60px;
+    width:700px;
+     display: flex;
+  flex-direction: column;
+}
+
+.field-label{
+display:flex;
+flex-direction:column;
+background:#f6e7ed;
+color:#c95c8a;
+font-weight:bold;
+padding: 10px;
+}
+
+.login-btn{
+margin: 30px auto 10px auto;
+    background:#D76797;
+    border:none;
+    padding:14px 30px;
+    color:#FFD9F2;
+    font-weight:bold;
+    font-size:18px;
+    border-radius:6px;
+    cursor:pointer;
+}
+.login-btn:hover{
+    opacity:0.9;
+}
+
+.erro{
+color: #f5526f;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.sucesso{
+  color: #b00084;
+  font-weight: bold;
+  padding: 10px;
+  margin-top: 10px;
+  text-align: center;
+}

@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+*{
+  padding: 0;
+  margin: 0;
+  font-family: 'Lexend Deca';
+}
+.home {
+  text-align: center;
+}
+
+.hero {
+  padding: 60px 0;
+}
+
+.hero h1 {
+  font-size: 64px;
+  color: #f2b6cc;
+}
+
+.hero-img {
+  width: 100%;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+}
+.no-results{
+  color: #DC77A2;
+
+}
+

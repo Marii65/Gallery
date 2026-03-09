@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+*{
+    font-family: 'Lexend Deca';
+    color:#DC77A2;
+}
+.signup-container{
+    display:flex;
+    justify-content:center;
+    margin-top:80px;
+}
+
+.signup-box{
+    background-color: rgba(247, 194, 217, 0.8);
+    padding:60px;
+    width:700px;
+     display: flex;
+  flex-direction: column;
+}
+
+.row{
+    display:flex;
+    gap:40px;
+}
+
+.field{
+    display:flex;
+    flex-direction:column;
+    width:100%;
+}
+
+.field label{
+    color:#c95c8a;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.field input,
+.field select{
+    background:#f6e7ed;
+    border:none;
+    padding:12px;
+}
+
+.full{
+    margin-top:25px;
+}
+
+.signup-btn{
+    margin: 30px auto 10px auto;
+    background:#D76797;
+    border:none;
+    padding:14px 30px;
+    color:#FFD9F2;
+    font-weight:bold;
+    font-size:18px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.signup-btn:hover{
+    opacity:0.9;
+}
+
+.login-link{
+    text-decoration:underline;
+    margin-top:15px;
+    text-align:center;
+    
+    cursor:pointer;
+}
+.erro{
+  color: #f5526f;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.sucesso{
+  color: #b00084;
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  text-align: center;
+}
