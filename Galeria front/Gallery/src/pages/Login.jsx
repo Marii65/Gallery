@@ -14,6 +14,8 @@ export default function Login() {
   const [erro, setErro] = useState("");
   const [mensagem, setMensagem] = useState("");
 
+  
+
   // Atualiza os campos do formulário
   function handleChange(e) {
     setForm({
@@ -24,46 +26,52 @@ export default function Login() {
 
   // Função principal de login
   async function handleSubmit(e) {
-    e.preventDefault();
-    setErro("");
-    setMensagem("");
+  e.preventDefault();
+  setErro("");
+  setMensagem("");
 
-    try {
-      const response = await fetch("http://localhost:8080/usuarios/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form)
-      });
+  try {
+    const response = await fetch("http://localhost:8080/usuarios/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form)
+    });
 
-      const data = await response.json();
+    const data = await response.json();
+    console.log("Resposta do backend:", data);
 
-      if (response.ok) {
-        // ✅ Login bem-sucedido
-        setMensagem("Login realizado!");
+    if (response.ok) {
 
-        // Salva token e dados do usuário no localStorage
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user));
+  setMensagem("Login realizado!");
 
-        // Redireciona de acordo com o tipo de usuário
-        redirectToProfile(data.user.role);
+  localStorage.setItem("token", data.token);
 
-      } else {
-        setErro(data.message || "Erro no login");
-      }
-    } catch (error) {
-      setErro("Erro ao conectar com o servidor");
-    }
+  if (data.user) {
+    localStorage.setItem("user", JSON.stringify(data.user));
+    redirectToProfile(data.user.role);
+  } else if (data.role) {
+    redirectToProfile(data.role);
+  } else {
+    console.log("Resposta do servidor:", data);
   }
+
+}
+
+  } catch (error) {
+  console.error(error);
+  setErro("Erro ao conectar com o servidor");
+}
+}
 
   // Redireciona para a página correta com base no perfil
   const redirectToProfile = (role) => {
-    switch (role) {
+     const r = role.toLowerCase();
+    switch (r) {
       case "user":
         navigate("/perfil"); // Usuário normal
         break;
       case "artista":
-        navigate("/perfil-artista"); // Artista
+        navigate("/artista"); // Artista
         break;
       case "adm":
         navigate("/admin"); // Admin

@@ -1,10 +1,12 @@
 package com.Berry.Gallery.api.controller;
 
 import com.Berry.Gallery.domain.model.Desenho;
+import com.Berry.Gallery.domain.model.Usuario;
 import com.Berry.Gallery.domain.repository.DesenhoRepository;
 import com.Berry.Gallery.domain.service.DesenhoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,7 +38,12 @@ public class DesenhoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Desenho adicionar(@RequestBody Desenho desenho) {
+    public Desenho adicionar(@RequestBody Desenho desenho, Authentication authentication) {
+
+        Usuario artista = (Usuario) authentication.getPrincipal();
+
+        desenho.setArtista(artista);
+
         return desenhoService.salvar(desenho);
     }
 
@@ -65,8 +72,16 @@ public class DesenhoController {
     }
 
     @DeleteMapping("/{desenhoId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void remover(@PathVariable Long desenhoId) {
+    public void remover(@PathVariable Long desenhoId, Authentication auth) {
+
+        Usuario usuario = (Usuario) auth.getPrincipal();
+
+        Desenho desenho = desenhoService.buscar(desenhoId);
+
+        if(!desenho.getArtista().getId().equals(usuario.getId())){
+            throw new RuntimeException("Você não pode excluir este desenho");
+        }
+
         desenhoService.excluir(desenhoId);
     }
 

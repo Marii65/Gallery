@@ -47,3 +47,7 @@
   height: 90px;
   object-fit: contain;
 }
+
+.submit{
+  border-style: none;
+}

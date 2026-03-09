@@ -3,20 +3,25 @@ import Galerias from "./pages/Home";
 import Signup from "./pages/Signup";
 import Usuario from "./pages/Usuario";
 import Login from "./pages/Login";
-import Artista from "./pages/Artista";
+import Artista from "./pages/Artista"
+import { AuthProvider } from "./context/AutoContext";
+
 
 
 function App() {
   return (
-
-    <Routes>
+<AuthProvider>
+<Routes>
       <Route path="/" element={<Galerias />} />
       <Route path="/galerias" element={<Galerias />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/usuario" element={<Usuario />} />
         <Route path="/login" element={<Login />}/>
-        <Route path="/perfil-artista" element={<Artista />}/>
+        <Route path="/artista" element={<Artista />}/>
+        
     </Routes>
+</AuthProvider>
+    
   );
 }
 

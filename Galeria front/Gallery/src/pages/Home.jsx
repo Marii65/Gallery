@@ -17,7 +17,7 @@ export default function Home() {
         .catch((err) => console.error(err));
     };
 
-    fetchArtists(); // primeira vez
+    fetchArtists(); 
 
     const interval = setInterval(fetchArtists, 5000); // 5 segundos
 
@@ -46,29 +46,6 @@ export default function Home() {
 
         <div className="cards">
           {filteredArtists.length === 0 ? (
-            <p className="no-results">Nenhum artista encontrado</p>
-          ) : (
-            filteredArtists.map((artist) => (
-              <ArtistCard
-                key={artist.id}
-                name={artist.nome}
-                photo={artist.fotoUrl}
-              />
-            ))
-          )}
-          
-          {filteredArtists.length === 0 ? ( //cards extra para exibir visualmente, remover dps de adicionar cards de artistas cadastrados automaticamente
-            <p className="no-results">Nenhum artista encontrado</p>
-          ) : (
-            filteredArtists.map((artist) => (
-              <ArtistCard
-                key={artist.id}
-                name={artist.nome}
-                photo={artist.fotoUrl}
-              />
-            ))
-          )}
-          {filteredArtists.length === 0 ? ( //cards extra para exibir visualmente, remover dps de adicionar cards de artistas cadastrados automaticamente
             <p className="no-results">Nenhum artista encontrado</p>
           ) : (
             filteredArtists.map((artist) => (

@@ -26,8 +26,9 @@ public class Desenho {
     @Column(name="titulo",length = 100, nullable = false)
     private String titulo;
 
-    @Column(name = "artista", length = 100, nullable = false)
-    private String artista;
+    @ManyToOne
+    @JoinColumn(name = "artista_id")
+    private Usuario artista;
 
     @Column(columnDefinition = "TEXT")
     private String descricao;

@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+*{
+    font-family: 'Lexend Deca';
+}
+
+.perfil-page{
+  background:#fff;
+  min-height:100vh;
+  
+}
+
+/* HEADER */
+
+.perfil-header{
+  background:#ffff;
+  
+  padding:25px 40px;
+  border-bottom:20px solid #63154C;
+}
+
+.perfil-info{
+  display:flex;
+  
+  align-items:center;
+  gap:20px;
+}
+.name{
+  color: #7C145D;
+}
+.avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  
+}
+.avatar{
+  width:80px;
+  height:80px;
+  background:#F7C2D9;
+  border:4px solid #a4567a;
+}
+
+/* LAYOUT */
+
+.perfil-content{
+  display:flex;
+  margin-top:20px;
+}
+
+/* MENU */
+
+.perfil-menu{
+  width:10%;
+  display:flex;
+  flex-direction:column;
+  gap:10%;
+  padding-left:2%;
+}
+
+
+.perfil-menu button{
+  background:#26001B;
+  color:#FFD9F2;
+  border:none;
+  padding:10px;
+  border-radius:10px;
+  font-weight: bold;
+  font-size: 20px;
+  cursor:pointer;
+}
+.perfil-menu button:hover{
+opacity: 0.9;
+  transform: scale(1.03);
+}
+/* GALERIA */
+
+.gallery-area{
+  background:#FFEDF5;
+  padding:30px;
+  margin-left:2%;
+  margin-right:2%;
+  width:100%;
+  max-width:100%;
+}
+
+.gallery-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.new-gallery{
+  background:#4c082b;
+  color:white;
+  border:none;
+  padding:10px 15px;
+  cursor:pointer;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.new-gallery:hover{
+opacity: 0.9;
+  transform: scale(1.03);
+}
+
+/* GRID */
+
+.gallery-grid{
+  display:flex;
+  gap:40px;
+  margin-top:30px;
+}
+
+.gallery-card{
+  width:200px;
+  text-align:center;
+}
+
+.gallery-card:hover{
+  opacity: 0.9;
+  transform: scale(1.03);
+  background-color: #4c082b;
+  cursor: pointer;
+}
+
+.img-placeholder{
+  width:200px;
+  height:200px;
+  background:#F7C2D9;
+}
+
+.gallery-card span{
+  display:block;
+  background:#63154C;
+  opacity: 0.68;
+  color:#FFD9F2;
+  font-weight: bold;
+  font-size: 20px;
+  padding:6px;
+  height: 50px;
+}
+
+.perfil-text{
+  display:flex;
+  flex-direction:column;
+}
+
+.perfil-nome{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.nome-input{
+  font-size:32px;
+  font-weight:700;
+  border:none;
+  outline:none;
+  color:#7C145D;
+  background:transparent;
+}
+
+.perfil-descricao{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.descricao-input{
+  border:none;
+  outline:none;
+  background:transparent;
+  font-size:16px;
+  color:#444;
+  resize:none;
+}
+
+.edit-icon{
+  cursor:pointer;
+  font-size:18px;
+}
+
+.edit-icon:hover{
+  opacity:0.7;
+}
