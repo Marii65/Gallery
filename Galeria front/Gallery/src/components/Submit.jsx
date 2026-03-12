@@ -28,7 +28,7 @@ function Submit() {
     const isLogged = !!localStorage.getItem("token");
 
     if (isLogged) {
-      navigate("/submit");
+      navigate("/post");
     } else {
       navigate("/login");
     }
@@ -55,7 +55,7 @@ function handleClick() {
     return;
   }
 
-  navigate("/submit");
+  navigate("/post");
 }
 
 export default Submit;

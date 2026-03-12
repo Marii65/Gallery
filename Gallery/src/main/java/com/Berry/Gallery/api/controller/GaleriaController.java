@@ -2,6 +2,8 @@ package com.Berry.Gallery.api.controller;
 
 import com.Berry.Gallery.api.dto.GaleriaInputDTO;
 import com.Berry.Gallery.api.dto.GaleriaOutputDTO;
+import com.Berry.Gallery.domain.model.Galeria;
+import com.Berry.Gallery.domain.repository.GaleriaRepository;
 import com.Berry.Gallery.domain.service.GaleriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,9 +20,9 @@ public class GaleriaController {
     @Autowired
     private GaleriaService galeriaService;
 
-    @GetMapping
-    public List<GaleriaOutputDTO> listar() {
-        return galeriaService.listar();
+    @GetMapping("/usuarios/{userId}")
+    public List<GaleriaOutputDTO> listarPorUsuario(@PathVariable Long userId) {
+        return galeriaService.listarPorUsuario(userId);
     }
 
     @GetMapping("/{galeriaId}")

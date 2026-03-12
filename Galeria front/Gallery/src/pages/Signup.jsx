@@ -14,7 +14,7 @@ const navigate = useNavigate();
     nome: "",
     email: "",
     senha: "",
-    role: "USER"
+    role: "ARTISTA"
   });
   function handleChange(e) {
     setForm({
@@ -92,7 +92,6 @@ async function handleSubmit(e) {
           <div className="field full">
             <label>*Account type:</label>
             <select name="role" onChange={handleChange}>
-              <option value="ADMIN">ADM</option>
               <option value="ARTISTA">ARTIST</option>
               <option value="USER">USER</option>
             </select>

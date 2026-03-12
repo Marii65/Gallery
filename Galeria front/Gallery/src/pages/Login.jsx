@@ -2,8 +2,11 @@ import Navbar from "../components/NavBar";
 import "../pages/Login.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 export default function Login() {
+
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
@@ -14,8 +17,6 @@ export default function Login() {
   const [erro, setErro] = useState("");
   const [mensagem, setMensagem] = useState("");
 
-  
-
   // Atualiza os campos do formulário
   function handleChange(e) {
     setForm({
@@ -24,68 +25,63 @@ export default function Login() {
     });
   }
 
-  // Função principal de login
+  // Função de login
   async function handleSubmit(e) {
+
   e.preventDefault();
-  setErro("");
-  setMensagem("");
 
-  try {
-    const response = await fetch("http://localhost:8080/usuarios/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form)
-    });
+  const response = await fetch("http://localhost:8080/usuarios/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(form)
+  });
 
-    const data = await response.json();
-    console.log("Resposta do backend:", data);
+  const data = await response.json();
 
-    if (response.ok) {
+  if(response.ok){
 
-  setMensagem("Login realizado!");
+    login(data);
 
-  localStorage.setItem("token", data.token);
-
-  if (data.user) {
-    localStorage.setItem("user", JSON.stringify(data.user));
-    redirectToProfile(data.user.role);
-  } else if (data.role) {
     redirectToProfile(data.role);
-  } else {
-    console.log("Resposta do servidor:", data);
+
+  }else{
+
+    setErro(data.message);
+
   }
 
 }
 
-  } catch (error) {
-  console.error(error);
-  setErro("Erro ao conectar com o servidor");
-}
-}
-
-  // Redireciona para a página correta com base no perfil
+  // Redirecionamento baseado no perfil
   const redirectToProfile = (role) => {
-     const r = role.toLowerCase();
+
+    const r = role.toLowerCase();
+
     switch (r) {
+
       case "user":
-        navigate("/perfil"); // Usuário normal
+        navigate("/usuario");
         break;
+
       case "artista":
-        navigate("/artista"); // Artista
+        navigate("/artista");
         break;
-      case "adm":
-        navigate("/admin"); // Admin
-        break;
+
       default:
-        navigate("/login"); // fallback
+        navigate("/login");
     }
   };
 
   return (
+
     <div>
+
       <Navbar />
 
       <div className="login-container">
+
         <form className="login-box" onSubmit={handleSubmit}>
 
           <div className="field">
@@ -113,11 +109,22 @@ export default function Login() {
           {erro && <p className="erro">{erro}</p>}
           {mensagem && <p className="sucesso">{mensagem}</p>}
 
-          <button type="submit" className="login-btn">Log in</button>
-          <p onClick={() => navigate("/signup")} className="login-link">Sign Up</p>
+          <button type="submit" className="login-btn">
+            Log in
+          </button>
+
+          <p
+            onClick={() => navigate("/signup")}
+            className="login-link"
+          >
+            Sign Up
+          </p>
 
         </form>
+
       </div>
+
     </div>
+
   );
 }

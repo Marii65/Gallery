@@ -22,12 +22,13 @@ public class GaleriaService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public List<GaleriaOutputDTO> listar() {
-        return galeriaRepository.findAll()
+    public List<GaleriaOutputDTO> listarPorUsuario(Long id) {
+        return galeriaRepository.findByUsuarioId(id)
                 .stream()
                 .map(this::toDTO)
                 .toList();
     }
+
 
     public GaleriaOutputDTO buscar(Long galeriaId) {
         Galeria galeria = galeriaRepository.findById(galeriaId)

@@ -11,8 +11,10 @@ import com.Berry.Gallery.domain.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -65,7 +67,8 @@ public class UsuarioService {
         usuario.setFotoUrl(dto.getFotoUrl());
 
         if (dto.getRole() != null) {
-            usuario.setRole(Usuario.Role.valueOf(dto.getRole()));
+            String roleNome = dto.getRole().toUpperCase().trim();
+            usuario.setRole(Usuario.Role.valueOf(roleNome));
         } else {
             usuario.setRole(Usuario.Role.USER);
         }
@@ -81,8 +84,8 @@ public class UsuarioService {
 
         boolean senhaCorreta = passwordEncoder.matches(login.getSenha(), usuario.getSenha());
 
-        if(!senhaCorreta){
-            throw new RuntimeException("Senha incorreta");
+        if (!passwordEncoder.matches(login.getSenha(), usuario.getSenha())) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Senha incorreta");
         }
 
         return toOutputDTO(usuario);

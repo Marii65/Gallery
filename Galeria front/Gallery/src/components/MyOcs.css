@@ -1,0 +1,68 @@
+.ocs-container {
+  width: 100%;
+}
+
+.ocs-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.ocs-title {
+  color: #95557e;
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.new-oc-btn {
+  background-color: #2d0320;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ocs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.oc-card {
+  background-color: #95557e;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.oc-card:hover {
+  transform: scale(1.05);
+}
+
+.oc-image-area {
+  height: 150px;
+  background-color: #f7c8da;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.oc-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: #f7c8da;
+}
+
+.oc-info {
+  padding: 10px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}

@@ -1,0 +1,85 @@
+.gallery-section {
+  padding: 40px;
+  background-color: #ffeaf2;
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.title {
+  color: #95557e;
+  font-size: 2.5rem;
+}
+
+.add-btn {
+  background-color: #2d0320;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 25px;
+}
+
+.folder-card {
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.folder-card:hover { transform: scale(1.03); }
+
+.folder-preview {
+  background-color: #f7c8da;
+  height: 200px;
+  border-radius: 4px 4px 0 0;
+}
+
+.folder-name {
+  background-color: #95557e;
+  color: white;
+  padding: 15px;
+  font-weight: 500;
+}
+
+/* Modal Styling */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 300px;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin: 15px 0;
+  border: 1px solid #ddd;
+}
+
+.confirm-btn {
+  background-color: #2d0320;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+}

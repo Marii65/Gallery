@@ -4,10 +4,12 @@ import com.Berry.Gallery.api.dto.UsuarioInputDTO;
 import com.Berry.Gallery.api.dto.UsuarioOutputDTO;
 import com.Berry.Gallery.api.dto.LoginDTO;
 import com.Berry.Gallery.domain.model.Usuario;
+import com.Berry.Gallery.domain.repository.UsuarioRepository;
 import com.Berry.Gallery.domain.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +21,12 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+
+    private final UsuarioRepository usuarioRepository;
+
+    public UsuarioController(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
+    }
 
 
     @GetMapping
@@ -61,6 +69,23 @@ public class UsuarioController {
     @GetMapping("/artistas")
     public List<UsuarioOutputDTO> listarArtistas() {
         return usuarioService.listarArtistas();
+    }
+
+    @PutMapping("/perfil/{id}")
+    public ResponseEntity<Usuario> atualizarPerfil(
+            @PathVariable Long id,
+            @RequestBody Usuario dados) {
+
+        Usuario usuario = usuarioRepository
+                .findById(id)
+                .orElseThrow();
+
+        usuario.setNome(dados.getNome());
+        usuario.setDescricao(dados.getDescricao());
+
+        usuarioRepository.save(usuario);
+
+        return ResponseEntity.ok(usuario);
     }
 
 
