@@ -4,7 +4,7 @@ import api from "../service/api";
 export default function Galeria() {
   const [galerias, setGalerias] = useState([]);
 
-  const usuarioId = 1; // depois você troca por login real
+  const usuarioId = 1; 
 
   async function carregarGalerias() {
   const response = await api.get("/galerias");

@@ -29,6 +29,12 @@ public class GaleriaService {
                 .toList();
     }
 
+    public List<GaleriaOutputDTO> listarTodas() {
+        return galeriaRepository.findAll()
+                .stream()
+                .map(this::toDTO)
+                .toList();
+    }
 
     public GaleriaOutputDTO buscar(Long galeriaId) {
         Galeria galeria = galeriaRepository.findById(galeriaId)

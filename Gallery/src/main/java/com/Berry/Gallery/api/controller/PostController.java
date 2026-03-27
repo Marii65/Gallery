@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/posts")
-@CrossOrigin(origins = "*") // OBRIGATÓRIO para o Upload funcionar
+@CrossOrigin(origins = "*")
 public class PostController {
 
     @Autowired

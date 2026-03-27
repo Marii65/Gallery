@@ -30,6 +30,11 @@ public class GaleriaController {
         return galeriaService.buscar(galeriaId);
     }
 
+    @GetMapping
+    public List<GaleriaOutputDTO> listar() {
+        return galeriaService.listarTodas();
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public GaleriaOutputDTO adicionar(@RequestBody GaleriaInputDTO dto) {

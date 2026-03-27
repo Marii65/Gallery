@@ -1,5 +1,6 @@
 package com.Berry.Gallery.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,11 +16,19 @@ public class Personagem {
     @EqualsAndHashCode.Include
     private Long id;
 
-    @Column(name= "nome_personagem", length = 50)
+    @Column(name= "nome_personagem", length = 50, nullable = false)
     private String nome;
 
-    @Column(name = "imagem_url")
-    private String imagemUrl;
+    @Lob
+    private byte[] imagemUrl;
+
+    @Column(name = "descricao")
+    private String descricao;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    @JsonIgnore
+    private Usuario usuario;
 
     public Personagem() {}
 }

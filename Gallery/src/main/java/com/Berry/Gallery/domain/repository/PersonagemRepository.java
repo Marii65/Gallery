@@ -8,4 +8,5 @@ import java.util.List;
 
 @Repository
 public interface PersonagemRepository extends JpaRepository<Personagem, Long> {
+    List<Personagem> findByUsuarioId(Long usuarioId);
 }
