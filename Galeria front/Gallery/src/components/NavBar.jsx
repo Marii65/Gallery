@@ -32,6 +32,7 @@ export default function Navbar() {
 
   const role = user.role?.toUpperCase();
 
+
   if(role === "ARTISTA"){
     navigate("/artista");
   } 
@@ -81,7 +82,7 @@ export default function Navbar() {
         {user && (
           <Submit
             className="submit"
-            onClick={() => navigate("/post")}
+            onClick={() => navigate("/artista")}
           />
         )}
 

@@ -4,6 +4,9 @@ import './NewPost.css';
 const NewPost = ({ userId, onSaveSuccess }) => {
 
   const [galerias, setGalerias] = useState([]);
+  const [imageFile, setImageFile] = useState(null);
+  const [preview, setPreview] = useState(null); // preview da imagem
+  const [erro, setErro] = useState("");
 
   const [formData, setFormData] = useState({
     artistName: '',
@@ -21,11 +24,10 @@ const NewPost = ({ userId, onSaveSuccess }) => {
 
   useEffect(() => {
     if (userId) {
-      fetch(`http://localhost:8080/galerias/usuario/${userId}`)
+      fetch(`http://localhost:8080/galerias/usuarios/${userId}`)
         .then(res => res.json())
         .then(data => {
           setGalerias(data);
-          // Opcional: define a primeira galeria como padrão se houver dados
           if (data.length > 0) {
             setFormData(prev => ({ ...prev, galleryId: data[0].id }));
           }
@@ -38,19 +40,45 @@ const NewPost = ({ userId, onSaveSuccess }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleImage = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const tiposPermitidos = ["image/jpeg", "image/png"];
+    if (!tiposPermitidos.includes(file.type)) {
+      setErro("Apenas imagens JPG ou PNG são permitidas.");
+      return;
+    }
+
+    if (file.size > 2 * 1024 * 1024) {
+      setErro("Imagem muito grande (máx 2MB).");
+      return;
+    }
+
+    setErro("");
+    setImageFile(file);
+    setPreview(URL.createObjectURL(file)); // cria preview
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
+      const form = new FormData();
+      form.append('data', JSON.stringify({ ...formData, userId }));
+      if (imageFile) form.append('image', imageFile);
+
       const response = await fetch('http://localhost:8080/posts', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, userId })
+        body: form
       });
 
       if (response.ok) {
         alert("Post realizado com sucesso!");
-        onSaveSuccess(); // Volta para a lista de posts
+        onSaveSuccess();
+      } else {
+        console.error('Erro ao salvar post:', response.statusText);
+        alert("Erro ao salvar post");
       }
     } catch (error) {
       console.error("Erro ao salvar:", error);
@@ -63,14 +91,27 @@ const NewPost = ({ userId, onSaveSuccess }) => {
       <h1 className="new-post-title">New Post</h1>
       
       <form className="new-post-form" onSubmit={handleSubmit}>
+
+        {/* IMAGEM */}
         <div className="upload-section">
-          <label className="image-placeholder-big">
-            <input type="file" hidden />
-            <i className="fa-solid fa-image-plus"></i>
-            <div className="add-icon">+</div>
-          </label>
+          {preview ? (
+            <img src={preview} alt="preview" className="image-preview" />
+          ) : (
+            <label className="image-placeholder-big">
+              <i className="fa-solid fa-image-plus"></i>
+              <div className="add-icon"><i class="fa-regular fa-image"></i></div>
+              <input
+                type="file"
+                accept="image/png, image/jpeg"
+                hidden
+                onChange={handleImage}
+              />
+            </label>
+          )}
+          {erro && <p className="erro">{erro}</p>}
         </div>
 
+        {/* CAMPOS */}
         <div className="fields-section">
           <div className="row">
             <div className="input-group">

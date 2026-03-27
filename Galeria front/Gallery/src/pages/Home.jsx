@@ -24,11 +24,12 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
-  const filteredArtists = artists.filter(
-    (artist) =>
-      artist.nome &&
-      artist.nome.toLowerCase().includes(search.toLowerCase())
-  );
+ const filteredArtists = artists.filter(
+  (artist) =>
+    artist.role.toUpperCase() === "ARTISTA" && 
+    artist.nome &&
+    artist.nome.toLowerCase().includes(search.toLowerCase())
+);
 
   return (
     <>

@@ -1,61 +1,38 @@
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import "./Submit.css";
+import { toast } from "react-toastify";
 
-function Submit() {
-
-  async function criarDesenho(desenho){
-
-  const token = localStorage.getItem("token");
-  localStorage.setItem("user", JSON.stringify(data.user));
-
-  const response = await fetch("http://localhost:8080/desenhos",{
-    method:"POST",
-    headers:{
-      "Content-Type":"application/json",
-      "Authorization":`Bearer ${token}`
-    },
-    body:JSON.stringify(desenho)
-  });
-
-  const data = await response.json();
-
-  return data;
-}
+function Submit({ className }) {
 
   const navigate = useNavigate();
+  const { user } = useAuth();
+    
 
   function handleClick() {
-    const isLogged = !!localStorage.getItem("token");
 
-    if (isLogged) {
-      navigate("/post");
-    } else {
-      navigate("/login");
-    }
-  }
-
-  return (
-    <button className="submit-btn" onClick={handleClick}>
-      Submit <span className="plus">+</span>
-    </button>
-  );
-}
-function handleClick() {
-
-  const token = localStorage.getItem("token");
-  const user = JSON.parse(localStorage.getItem("user"));
-
-  if(!token){
+  if (!user) {
     navigate("/login");
     return;
   }
 
-  if(user.role !== "artista"){
-    alert("Apenas artistas podem enviar desenhos");
-    return;
-  }
+  const role = user.role?.toUpperCase();
 
-  navigate("/post");
+  if (role !== "ARTISTA") {
+  toast.error("Apenas artistas podem enviar desenhos");
+  return;
+}
+navigate("/artista")
 }
 
-export default Submit;
+  return (
+    <button
+      className={`submit-btn ${className || ""}`}
+      onClick={handleClick}
+    >
+      Submit <span className="plus">+</span>
+    </button>
+  );
+}
+
+export default Submit;  

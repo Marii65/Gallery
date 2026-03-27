@@ -12,6 +12,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -50,7 +51,6 @@ public class PostService {
         post.setUsuario(usuario);
         post.setGaleria(galeria);
 
-        // Salva e converte para OutputDTO
         Post postSalvo = postRepository.save(post);
         return toOutputDTO(postSalvo);
     }
@@ -62,11 +62,16 @@ public class PostService {
                 .toList();
     }
 
-    private PostOutputDTO toOutputDTO(Post post) {
+    public PostOutputDTO toOutputDTO(Post post) {
         PostOutputDTO dto = new PostOutputDTO();
         dto.setId(post.getId());
         dto.setTitle(post.getTitle());
-        // dto.setImageUrl(post.getImageUrl()); // Ative quando tiver lógica de imagem
+
+        if (post.getImagemUrl() != null) {
+            String base64Image = Base64.getEncoder().encodeToString(post.getImagemUrl());
+            dto.setImageUrl(base64Image);
+        }
+
         return dto;
     }
 }

@@ -29,6 +29,11 @@ public class Post {
     private String characterType;
     private String characterName;
 
+    @Lob
+    @Column(name = "image", columnDefinition = "LONGBLOB")
+    private byte[] imagemUrl;
+
+
     @Column(columnDefinition = "TEXT")
     private String description;
 

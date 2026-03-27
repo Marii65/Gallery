@@ -8,5 +8,6 @@ public class PostOutputDTO {
     private Long id;
     private String title;
     private String imageUrl;
-    // Adicione outros campos que deseja mostrar na galeria
+
+
 }

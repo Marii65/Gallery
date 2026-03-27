@@ -6,6 +6,8 @@ import Usuario from "./pages/Usuario";
 import Login from "./pages/Login";
 import Artista from "./pages/Artista";
 import Desenhos from "./pages/Desenho";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { AuthProvider } from "./context/AuthContext";
 
@@ -39,6 +41,7 @@ export default function App() {
           </Route>
 
         </Routes>
+        <ToastContainer />
       </AuthProvider>
 
   );
