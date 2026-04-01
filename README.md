@@ -43,7 +43,6 @@ A plataforma possui diferentes tipos de usuários:
 
 * **Usuário** → pode visualizar e interagir com artes
 * **Artista** → pode publicar suas próprias artes
-* **Administrador** → gerencia usuários e conteúdos
 
 ---
 
