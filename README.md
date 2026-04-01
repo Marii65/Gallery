@@ -97,5 +97,5 @@ npm run dev
 
 ## 👩‍💻 Desenvolvido por
 
-Mari
+Maria Luiza.
 Projeto de estudo para desenvolvimento **Full Stack com Java e React**.
