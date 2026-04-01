@@ -19,7 +19,7 @@ public class Usuario {
     @Column(length = 50, nullable = false,  unique = true)
     private String nome;
 
-    @Column(length = 255)
+    @Column(length = 100)
     private String descricao;
 
     @Column(length = 50, nullable = false,  unique = true)
@@ -32,7 +32,8 @@ public class Usuario {
     @Column(nullable = false)
     private Role role;
 
-    @Column(length = 255)
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
     private String fotoUrl;
 
     public enum Role {

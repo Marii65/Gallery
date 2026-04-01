@@ -92,7 +92,6 @@ public class UsuarioService {
     }
 
     public UsuarioOutputDTO atualizar(Long usuarioId, UsuarioInputDTO dto) {
-
         Usuario usuario = usuarioRepository.findById(usuarioId)
                 .orElseThrow(() ->
                         new EntidadeNaoEncontradaException(
@@ -100,15 +99,17 @@ public class UsuarioService {
                         )
                 );
 
-        usuario.setNome(dto.getNome());
-        usuario.setEmail(dto.getEmail());
+        if (dto.getNome() != null) usuario.setNome(dto.getNome());
+        if (dto.getEmail() != null) usuario.setEmail(dto.getEmail());
+        if (dto.getFotoUrl() != null) usuario.setFotoUrl(dto.getFotoUrl());
 
-        usuario.setSenha(passwordEncoder.encode(dto.getSenha()));
+        if (dto.getDescricao() != null) usuario.setDescricao(dto.getDescricao());
 
-        usuario.setFotoUrl(dto.getFotoUrl());
+        if (dto.getSenha() != null && !dto.getSenha().isBlank()) {
+            usuario.setSenha(passwordEncoder.encode(dto.getSenha()));
+        }
 
         Usuario atualizado = usuarioRepository.save(usuario);
-
         return toOutputDTO(atualizado);
     }
 

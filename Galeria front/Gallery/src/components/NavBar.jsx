@@ -89,8 +89,21 @@ export default function Navbar() {
         <div className="profile-container" ref={menuRef}>
 
           <button onClick={toggleMenu} className="profile">
-            <i className="fa-solid fa-user"></i>
-          </button>
+  {user && user.fotoUrl ? (
+    <img 
+      src={user.fotoUrl} 
+      alt="Perfil" 
+      style={{
+        width: '100%',
+        height: '100%',
+        borderRadius: '50%',
+        objectFit: 'cover'
+      }} 
+    />
+  ) : (
+    <i className="fa-solid fa-user"></i>
+  )}
+</button>
 
           {menuOpen && (
             <div className="dropdown">
