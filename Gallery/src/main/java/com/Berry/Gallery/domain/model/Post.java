@@ -1,5 +1,7 @@
 package com.Berry.Gallery.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -8,6 +10,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
@@ -21,13 +24,16 @@ public class Post {
 
     private String artistName;
     private String title;
-    private LocalDate creationDate;
     private String tecnica;
     private String type;
     private String style;
     private String theme;
     private String characterType;
     private String characterName;
+
+    private int likes = 0;
+
+
 
     @Lob
     @Column(name = "image", columnDefinition = "LONGBLOB")
@@ -41,5 +47,10 @@ public class Post {
     private Usuario usuario;
 
     @ManyToOne
+    @JoinColumn(name = "galeria_id", nullable = true)
     private Galeria galeria;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate creationDate;
+
 }

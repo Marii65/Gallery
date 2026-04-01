@@ -61,30 +61,39 @@ const NewPost = ({ userId, onSaveSuccess }) => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      const form = new FormData();
-      form.append('data', JSON.stringify({ ...formData, userId }));
-      if (imageFile) form.append('image', imageFile);
+  
 
-      const response = await fetch('http://localhost:8080/posts', {
-        method: 'POST',
-        body: form
-      });
+  try {
+    const form = new FormData();
+    form.append('data', JSON.stringify({ ...formData, userId }));
 
-      if (response.ok) {
-        alert("Post realizado com sucesso!");
-        onSaveSuccess();
-      } else {
-        console.error('Erro ao salvar post:', response.statusText);
-        alert("Erro ao salvar post");
-      }
-    } catch (error) {
-      console.error("Erro ao salvar:", error);
-      alert("Erro ao conectar com a API");
+    if (imageFile) {
+      form.append('image', imageFile);
     }
-  };
+
+    const response = await fetch('http://localhost:8080/posts', {
+      method: 'POST',
+      body: form
+    });
+
+    if (response.ok) {
+      const result = await response.json(); // 👈 usa "result"
+      console.log("Sucesso:", result);
+
+      alert("Post realizado com sucesso!");
+      onSaveSuccess();
+    } else {
+      console.error('Erro ao salvar post:', response.statusText);
+      alert("Erro ao salvar post");
+    }
+
+  } catch (error) {
+    console.error("Erro ao salvar:", error);
+    alert("Erro ao conectar com a API");
+  }
+};
 
   return (
     <div className="new-post-container">
@@ -94,22 +103,27 @@ const NewPost = ({ userId, onSaveSuccess }) => {
 
         {/* IMAGEM */}
         <div className="upload-section">
-          {preview ? (
-            <img src={preview} alt="preview" className="image-preview" />
-          ) : (
-            <label className="image-placeholder-big">
-              <i className="fa-solid fa-image-plus"></i>
-              <div className="add-icon"><i class="fa-regular fa-image"></i></div>
-              <input
-                type="file"
-                accept="image/png, image/jpeg"
-                hidden
-                onChange={handleImage}
-              />
-            </label>
-          )}
-          {erro && <p className="erro">{erro}</p>}
-        </div>
+  <label className="upload-box">
+    
+    {preview ? (
+      <img src={preview} alt="preview" className="preview-img" />
+    ) : (
+      <div className="upload-content">
+        <i className="fa-regular fa-image upload-icon"></i>
+        <span>Adicionar imagem</span>
+      </div>
+    )}
+
+    <input
+      type="file"
+      accept="image/png, image/jpeg"
+      onChange={handleImage}
+      hidden
+    />
+  </label>
+
+  {erro && <p className="erro">{erro}</p>}
+</div>
 
         {/* CAMPOS */}
         <div className="fields-section">
@@ -124,7 +138,12 @@ const NewPost = ({ userId, onSaveSuccess }) => {
             </div>
             <div className="input-group">
               <label>*Creation Date:</label>
-              <input type="date" name="creationDate" required onChange={handleChange} />
+              <input 
+  type="date" 
+  name="creationDate" 
+  value={formData.creationDate}
+  onChange={handleChange}
+/>
             </div>
           </div>
 
@@ -207,7 +226,9 @@ const NewPost = ({ userId, onSaveSuccess }) => {
                       </option>
                     ))
                   ) : (
-                    <option value="">Nenhuma galeria encontrada</option>
+                    <option disabled value="">
+  Nenhuma galeria encontrada
+</option>
                   )}
                 </select>
              </div>

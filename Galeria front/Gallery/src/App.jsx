@@ -8,6 +8,8 @@ import Artista from "./pages/Artista";
 import Desenhos from "./pages/Desenho";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Post from "./pages/Post";
+import MyFavorites from "./components/MyFavorites";
 
 import { AuthProvider } from "./context/AuthContext";
 
@@ -25,6 +27,8 @@ export default function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/usuario" element={<Usuario />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/post/:id" element={<Post />} />
+          
 
           {/* ÁREA DO ARTISTA */}
           <Route path="/artista" element={<Artista />}>

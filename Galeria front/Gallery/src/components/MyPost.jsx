@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './MyPost.css';
+import { useNavigate } from "react-router-dom";
 
 const MyPosts = ({ userId, onAddNew }) => {
   const [posts, setPosts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Busca os posts ordenados por data de criação no seu Spring Boot
@@ -25,19 +27,23 @@ const MyPosts = ({ userId, onAddNew }) => {
 
       <div className="posts-grid">
         {posts.length > 0 ? (
-          posts.map((post) => (
-            <div key={post.id} className="post-card">
-              <div className="post-image">
-                {post.imageUrl ? (
-                  <img src={post.imageUrl} alt={post.title} />
-                ) : (
-                  <div className="post-placeholder" />
-                )}
-              </div>
+         posts.map((post) => (
+            <div key={post.id} className="post-card"
+             onClick={() => navigate(`/post/${post.id}`)}>
+              
+               <div className="post-image">
+      <img
+        src={`http://localhost:8080/posts/${post.id}/imagemUrl`}
+        alt={post.title}
+      />
+    </div>
+    <div className="post-info">
+      <h3>{post.title}</h3>
+    </div>
             </div>
           ))
         ) : (
-          /* Placeholders estáticos para preencher a tela enquanto não há dados, como na sua imagem */
+          
           <>
             {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
               <div key={n} className="post-card">

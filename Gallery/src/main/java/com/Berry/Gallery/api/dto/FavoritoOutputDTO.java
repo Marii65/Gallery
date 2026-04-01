@@ -1,40 +1,28 @@
 package com.Berry.Gallery.api.dto;
 
+import com.Berry.Gallery.domain.model.Favorito;
+
 public class FavoritoOutputDTO {
+
     private Long id;
-    private Long usuarioId;
-    private Long desenhoId;
-    private String nomeDesenho;
+    private Long postId;
+    private String title;
+
+    public FavoritoOutputDTO(Favorito favorito) {
+        this.id = favorito.getId();
+        this.postId = favorito.getPost().getId();
+        this.title = favorito.getPost().getTitle();
+    }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getPostId() {
+        return postId;
     }
 
-    public Long getUsuarioId() {
-        return usuarioId;
-    }
-
-    public void setUsuarioId(Long usuarioId) {
-        this.usuarioId = usuarioId;
-    }
-
-    public Long getDesenhoId() {
-        return desenhoId;
-    }
-
-    public void setDesenhoId(Long desenhoId) {
-        this.desenhoId = desenhoId;
-    }
-
-    public String getNomeDesenho() {
-        return nomeDesenho;
-    }
-
-    public void setNomeDesenho(String nomeDesenho) {
-        this.nomeDesenho = nomeDesenho;
+    public String getTitle() {
+        return title;
     }
 }

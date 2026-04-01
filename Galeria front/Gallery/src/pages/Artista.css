@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 *{
     font-family: 'Lexend Deca';
+    
 }
 
 .perfil-page{
@@ -13,7 +14,7 @@
 
 .perfil-header{
   background:#ffff;
-  
+ 
   padding:25px 40px;
   border-bottom:20px solid #63154C;
 }
@@ -32,6 +33,7 @@
   height:100%;
   object-fit:cover;
   
+  
 }
 .avatar{
   width:80px;
@@ -43,6 +45,7 @@
 /* LAYOUT */
 
 .perfil-content{
+  
   display:flex;
   margin-top:20px;
 }

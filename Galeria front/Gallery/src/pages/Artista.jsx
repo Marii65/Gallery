@@ -6,7 +6,8 @@ import { useAuth } from "../context/AuthContext";
 import MyGallery from "../components/MyGallery";
 import MyOcs from "../components/MyOcs";
 import MyPost from "../components/MyPost";
-import NewPost from "../components/NewPost"
+import NewPost from "../components/NewPost";
+import MyFavorites from "../components/MyFavorites";
 
 export default function PerfilArtista() {
 
@@ -171,7 +172,9 @@ export default function PerfilArtista() {
       onSaveSuccess={() => setAbaAtiva("posts")} 
     />
   )}
-          {abaAtiva === "favorites" && <div>Em breve: Desenhos Favoritos</div>}
+          {abaAtiva === "favorites" && (
+  <MyFavorites userId={user?.id} />
+)}
           
         </div>
       </div>
