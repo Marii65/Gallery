@@ -1,57 +1,73 @@
-import { useEffect, useState } from "react";
-import api from "../service/api";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import "./Galeria.css";
+import Navbar from "../components/NavBar";
 
-export default function Galeria() {
-  const [galerias, setGalerias] = useState([]);
+const Galeria = () => {
+  const { id } = useParams();
 
-  const usuarioId = 1; 
+  const [gallery, setGallery] = useState(null);
+  const [posts, setPosts] = useState([]);
 
-  async function carregarGalerias() {
-  const response = await api.get("/galerias");
-  setGalerias(response.data);
-}
+  const userId = 1;
 
-
-  // ❤️ FUNÇÃO DE FAVORITAR
-  async function favoritar(desenhoId) {
-    try {
-      await api.post("/favoritos", null, {
-        params: {
-          usuarioId: usuarioId,
-          desenhoId: desenhoId
-        }
-      });
-
-      alert("Favoritado com sucesso ❤️");
-    } catch (error) {
-      console.error(error);
-      alert("Erro ao favoritar");
-    }
-  }
-
+  
   useEffect(() => {
-    carregarGalerias();
-  }, []);
+    fetch(`http://localhost:8080/galerias/${id}`)
+      .then((res) => res.json())
+      .then((data) => setGallery(data));
+
+    fetch(`http://localhost:8080/posts?galleryId=${id}`)
+      .then((res) => res.json())
+      .then((data) => setPosts(data));
+  }, [id]);
+
+  if (!gallery) return <p>Carregando...</p>;
+
+  const isOwner = gallery.usuario_id === userId;
 
   return (
-    <div>
-      <h1>Galeria</h1>
+    <div className="gallery-page">
+      <Navbar />
 
-      <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
-        {galerias.map(desenho => (
-          <div key={desenho.id} style={{ border: "1px solid #ccc", padding: 10 }}>
-            <img
-              src={desenho.imagemUrl}
-              alt={desenho.titulo}
-              width={200}
-            />
+    
+      <div className="gallery-header">
+        <h1>{gallery.nome}</h1>
+        <p>{gallery.descricao || "Sem descrição"}</p>
 
-            <h3>{desenho.titulo}</h3>
+        <span className="date">
+          Criado em:{" "}
+          {new Date(gallery.data_criacao).toLocaleDateString()}
+        </span>
 
-          
-          </div>
-        ))}
+        <span className="status">
+          {gallery.is_public ? "🌍 Pública" : "🔒 Privada"}
+        </span>
+
+        
+        {isOwner && (
+          <button className="add-post-btn">
+            + Adicionar desenho
+          </button>
+        )}
+      </div>
+
+      <div className="posts-grid">
+        {posts.length === 0 ? (
+          <p>Nenhum desenho ainda 😢</p>
+        ) : (
+          posts.map((post) => (
+            <div key={post.id} className="post-card">
+              <img src={post.image_url} alt={post.titulo} />
+              <div className="post-info">
+                <h4>{post.titulo}</h4>
+              </div>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
-}
+};
+
+export default Galeria;

@@ -14,39 +14,34 @@ import MyFavorites from "./components/MyFavorites";
 import { AuthProvider } from "./context/AuthContext";
 
 import MyGallery from "./components/MyGallery";
+import Galeria from "./pages/Galeria";
 
 export default function App() {
   return (
-    
-      <AuthProvider>
-        <Routes>
+    <AuthProvider>
+      <Routes>
 
-          {/* ROTAS PÚBLICAS */}
-          <Route path="/" element={<Galerias />} />
-          <Route path="/galerias" element={<Galerias />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/usuario" element={<Usuario />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/post/:id" element={<Post />} />
-          
+        {/* ROTAS PÚBLICAS */}
+        <Route path="/" element={<Galerias />} />
+        <Route path="/galerias" element={<Galerias />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/usuario" element={<Usuario />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/post/:id" element={<Post />} />
 
-          {/* ÁREA DO ARTISTA */}
-          <Route path="/artista" element={<Artista />}>
+        {/* ÁREA DO ARTISTA */}
+        <Route path="/artista" element={<Artista />}>
 
-            {/* Redireciona automaticamente para gallery */}
-            <Route index element={<Navigate to="gallery" />} />
+          <Route index element={<Navigate to="gallery" />} />
+          <Route path="gallery" element={<MyGallery />} />
+          <Route path="gallery/:id" element={<Galeria />} />
+          <Route path="personagem/:id" element={<Desenhos />} />
 
-            {/* Lista de personagens */}
-            <Route path="gallery" element={<MyGallery />} />
+        </Route>
 
-            {/* Página de desenhos por personagem */}
-            <Route path="personagem/:id" element={<Desenhos />} />
+      </Routes>
 
-          </Route>
-
-        </Routes>
-        <ToastContainer />
-      </AuthProvider>
-
+      <ToastContainer />
+    </AuthProvider>
   );
 }

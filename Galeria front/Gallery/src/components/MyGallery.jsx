@@ -1,80 +1,126 @@
-import React from 'react';
-import './MyGallery.css';
-import "./NavBar.css";
-import Navbar from './NavBar';
-import { Nav } from 'react-bootstrap';
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import "./MyGallery.css";
+import { useNavigate } from "react-router-dom";
 
 const MyGallery = () => {
   const [galerias, setGalerias] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [newName, setNewName] = useState("");
+  const [newGallery, setNewGallery] = useState({
+    nome: "",
+    descricao: "",
+    isPublic: false
+  });
 
-  // 1. Buscar dados da API ao carregar
+  const navigate = useNavigate();
+
   useEffect(() => {
-    fetch('http://localhost:8080/galerias') // Usando ID 1 como exemplo
-      .then(res => res.json())
-      .then(data => setGalerias(data));
+    fetch("http://localhost:8080/galerias?userId=1")
+      .then((res) => res.json())
+      .then((data) => setGalerias(data))
+      .catch((err) => console.error(err));
   }, []);
 
-  // 2. Função para salvar nova galeria no Banco
   const handleSave = () => {
-    const newGallery = { name: newName, coverUrl: "", userId: 1 };
+    if (!newGallery.nome.trim()) {
+      alert("Nome da galeria é obrigatório!");
+      return;
+    }
 
-    fetch('http://localhost:8080/galerias', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newGallery)
+    const galleryToSend = {
+      nome: newGallery.nome,
+      descricao: newGallery.descricao,
+      data_criacao: new Date().toISOString(),
+      usuario_id: 1,
+      is_public: newGallery.isPublic
+    };
+
+    fetch("http://localhost:8080/galerias", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(galleryToSend)
     })
-    .then(res => res.json())
-    .then(savedGallery => {
-      setGalerias([...galleries, savedGallery]); // Atualiza a lista na tela
-      setShowModal(false);
-      setNewName("");
-    });
+      .then((res) => res.json())
+      .then((savedGallery) => {
+        setGalerias([...galerias, savedGallery]);
+        setNewGallery({ nome: "", descricao: "", isPublic: false });
+        setShowModal(false);
+      })
+      .catch((err) => console.error(err));
   };
 
   return (
-   
     <div className="gallery-section">
-
       <div className="header">
-        <h1 className="title">My Gallery</h1>
+        <h1 className="title">My Galleries</h1>
         <button className="add-btn" onClick={() => setShowModal(true)}>
-          New Gallery <span>+</span>
+          New Gallery +
         </button>
       </div>
 
       <div className="grid">
-        {galerias.map(g => (
-          <div key={g.id} className="folder-card">
+        {galerias.map((g, index) => (
+          <div
+            key={g.id || index}
+            className="folder-card"
+            onClick={() => navigate(`/artista/gallery/${g.id}`)}
+          >
             <div className="folder-preview">
-              {g.coverUrl ? <img src={g.coverUrl} alt={g.name} /> : <div className="placeholder" />}
+              <div className="placeholder" />
             </div>
-            <div className="folder-name">{g.name}</div>
+
+            <div className="folder-info">
+              <h4 className="folder-name">{g.nome}</h4>
+              <p className="folder-desc">
+                {g.descricao || "Nenhuma descrição adicionada."}
+              </p>
+              <div className="folder-status">
+                <span>{g.is_public ? "🌍" : "🔒"}</span>
+                {g.is_public ? "Pública" : "Privada"}
+              </div>
+            </div>
           </div>
         ))}
       </div>
 
-      {/* Modal para criar nova galeria */}
       {showModal && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <h3>Nome da Galeria</h3>
-            <input 
-              value={newName} 
-              onChange={(e) => setNewName(e.target.value)}
-              placeholder="Ex: Estudos de Anatomia"
+            <h3>Criar Nova Galeria</h3>
+
+            <input
+              type="text"
+              placeholder="Nome da Galeria *"
+              value={newGallery.nome}
+              onChange={(e) => setNewGallery({ ...newGallery, nome: e.target.value })}
             />
+
+            <textarea
+              placeholder="Descrição (opcional)"
+              value={newGallery.descricao}
+              onChange={(e) => setNewGallery({ ...newGallery, descricao: e.target.value })}
+            />
+
+            <label className="checkbox">
+              <input
+                type="checkbox"
+                checked={newGallery.isPublic}
+                onChange={(e) => setNewGallery({ ...newGallery, isPublic: e.target.checked })}
+              />
+              Tornar pública
+            </label>
+
             <div className="modal-actions">
-              <button onClick={() => setShowModal(false)}>Cancelar</button>
-              <button className="confirm-btn" onClick={handleSave}>Criar</button>
+              <button className="cancel-btn" onClick={() => setShowModal(false)}>
+                Cancelar
+              </button>
+              <button className="confirm-btn" onClick={handleSave}>
+                Criar Galeria
+              </button>
             </div>
           </div>
         </div>
       )}
     </div>
-   
   );
 };
 
