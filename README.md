@@ -43,7 +43,6 @@ A plataforma possui diferentes tipos de usuários:
 
 * **Usuário** → pode visualizar e interagir com artes
 * **Artista** → pode publicar suas próprias artes
-* **Administrador** → gerencia usuários e conteúdos
 
 ---
 
@@ -52,7 +51,7 @@ A plataforma possui diferentes tipos de usuários:
 ✔ Cadastro e login de usuários
 ✔ Perfis de artistas
 ✔ Publicação de desenhos
-✔ Galeria de artes estilo Pinterest
+✔ Galeria de artes
 ✔ Visualização de artes de outros artistas
 ✔ Sistema de autenticação
 
@@ -98,5 +97,5 @@ npm run dev
 
 ## 👩‍💻 Desenvolvido por
 
-Mari
+Maria Luiza.
 Projeto de estudo para desenvolvimento **Full Stack com Java e React**.
