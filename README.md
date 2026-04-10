@@ -82,7 +82,7 @@ galeria-de-artes
 
 ### Banco de Dados
 ```bash
-Inicie o serviço MySQL.(Recomendação: Xampp)
+Inicie o serviço MySQL (Recomendação: Xampp)
 ```
 
 ### Backend
