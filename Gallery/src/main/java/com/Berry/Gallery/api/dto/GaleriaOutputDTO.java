@@ -5,7 +5,6 @@ public class GaleriaOutputDTO {
     private Long id;
     private String nome;
     private String descricao;
-    private Long usuarioId;
     private String nomeUsuario;
 
     public Long getId() {
@@ -32,13 +31,6 @@ public class GaleriaOutputDTO {
         this.descricao = descricao;
     }
 
-    public Long getUsuarioId() {
-        return usuarioId;
-    }
-
-    public void setUsuarioId(Long usuarioId) {
-        this.usuarioId = usuarioId;
-    }
 
     public String getNomeUsuario() {
         return nomeUsuario;

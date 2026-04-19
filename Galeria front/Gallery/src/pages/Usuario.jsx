@@ -1,5 +1,6 @@
 export default function Usuario(){
 
+    // pagina nao utilizada no momento
  const usuario = JSON.parse(localStorage.getItem("usuario"));
 
  return(
@@ -14,5 +15,5 @@ export default function Usuario(){
   </div>
 
  )
-
+ // pagina nao utilizada no momento 
 }

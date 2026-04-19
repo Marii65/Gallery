@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Navbar from "../components/NavBar";
 import SearchBar from "../components/SearchBar";
 import ArtistCard from "../components/ArtistCard";
@@ -50,11 +51,17 @@ export default function Home() {
             <p className="no-results">Nenhum artista encontrado</p>
           ) : (
             filteredArtists.map((artist) => (
+              <Link 
+                to={`/perfil/${artist.id}`} 
+                key={artist.id} 
+                style={{ textDecoration: 'none', color: 'inherit' }}
+              >
               <ArtistCard
                 key={artist.id}
                 name={artist.nome}
                 photo={artist.fotoUrl}
               />
+              </Link>
             ))
           )}
 

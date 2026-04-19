@@ -1,20 +1,23 @@
 .gallery-section {
-  padding: 40px;
-  background-color: #ffeaf2;
+  padding: 40px; 
+  width: 100%;
+  box-sizing: border-box; 
   min-height: 100vh;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 20px; 
+  background-color: #ffeaf2;
+  font-family: 'Lexend Deca', sans-serif;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .title {
   color: #95557e;
-  font-size: 2.5rem;
+  font-size: 2rem;
   margin: 0;
 }
 
@@ -22,11 +25,15 @@
   background-color: #2d0320;
   color: white;
   border: none;
-  padding: 12px 24px;
+  padding: 10px 20px;
   border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
   transition: background 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
 }
 
 .add-btn:hover {
@@ -36,15 +43,15 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 30px;
+  gap: 20px;
 }
 
 .folder-card {
   background-color: white;
-  border-radius: 16px;
+  border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease; 
   display: flex;
   flex-direction: column;
   cursor: pointer;
@@ -52,12 +59,12 @@
 }
 
 .folder-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 25px rgba(149, 85, 126, 0.15);
+  transform: scale(1.05); /* Padronizado: agora a pasta dá o mesmo 'zoom' que os OCs e Posts */
+  box-shadow: 0 10px 20px rgba(149, 85, 126, 0.15);
 }
 
 .folder-preview {
-  background-color: #fce4ec;
+  background-color: #8b597f;
   height: 160px;
   display: flex;
   align-items: center;
@@ -65,10 +72,10 @@
 }
 
 .folder-info {
-  padding: 20px;
+  padding: 15px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .folder-name {
@@ -98,105 +105,112 @@
   font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-top: 10px;
-  padding-top: 12px;
+  gap: 8px;
+  margin-top: 5px;
+  padding-top: 10px;
   border-top: 1px solid #fdf0f5;
   color: #e91e63;
 }
+
 
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw; 
+  height: 100vh; 
+  background-color: rgba(0, 0, 0, 0.5); 
   display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
+  align-items: center; 
+  justify-content: center; 
+  z-index: 9999; 
 }
 
 .modal-content {
   background-color: white;
-  padding: 30px;
   width: 450px;
-  border-radius: 20px;
+  border-radius: 15px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: #95557e;
+  font-size: 1.3rem;
+}
+
+.modal-header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.modal-body {
+  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 15px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-  box-sizing: border-box;
 }
 
-.modal-content h3 {
-  margin: 0 0 5px 0;
-  color: #95557e;
-}
-
-.modal-content input[type="text"],
-.modal-content textarea {
-  width: 100%;
+.modal-body input[type="text"],
+.modal-body input, 
+.modal-body textarea {
+  
   padding: 12px;
+  border-radius: 8px;
   border: 1px solid #ddd;
-  border-radius: 10px;
-  font-family: inherit;
   font-size: 14px;
+  font-family: inherit;
   box-sizing: border-box;
   display: block;
 }
 
-.modal-content textarea {
+.modal-body input:focus,
+.modal-body textarea:focus {
+  outline: none;
+  border-color: #e91e63;
+  box-shadow: 0 0 0 2px rgba(233, 30, 99, 0.1);
+}
+
+.modal-body textarea {
   height: 100px;
   resize: none;
 }
 
-.checkbox {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 8px;
-  font-size: 14px;
-  color: #95557e;
-  cursor: pointer;
-  width: 100%;
-}
-
-.modal-actions {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  gap: 12px;
-  margin-top: 10px;
-  padding-top: 20px;
-  border-top: 1px solid #eee;
-  width: 100%;
-}
-
-.modal-actions .cancel-btn,
-.modal-actions .confirm-btn {
-  position: static;
-  float: none;
-  display: inline-block;
-  padding: 10px 25px;
-  border-radius: 10px;
-  border: none;
-  font-weight: bold;
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-
-.modal-actions .cancel-btn {
-  background-color: #f0f0f0;
+.cancel-btn {
+  background-color: #f3f3f3;
   color: #666;
+  border: none;
+  padding: 10px 20px; /* Padronizado */
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
 }
 
-.modal-actions .confirm-btn {
+.cancel-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.confirm-btn {
   background-color: #e91e63;
   color: white;
+  border: none;
+  padding: 10px 20px; /* Padronizado */
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
 }
 
-.modal-actions button:hover {
-  opacity: 0.9;
+.confirm-btn:hover {
+  background-color: #d81b60;
 }

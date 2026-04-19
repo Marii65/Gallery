@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./MyGallery.css";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+
 
 const MyGallery = () => {
   const [galerias, setGalerias] = useState([]);
@@ -8,17 +10,20 @@ const MyGallery = () => {
   const [newGallery, setNewGallery] = useState({
     nome: "",
     descricao: "",
-    isPublic: false
   });
-
   const navigate = useNavigate();
+  const { user } = useAuth();
+
 
   useEffect(() => {
-    fetch("http://localhost:8080/galerias?userId=1")
-      .then((res) => res.json())
-      .then((data) => setGalerias(data))
-      .catch((err) => console.error(err));
-  }, []);
+  if (!user?.id) return;
+
+  fetch(`http://localhost:8080/galerias/usuarios/${user.id}`)
+    .then(res => res.json())
+    .then(data => setGalerias(data))
+    .catch(err => console.error(err));
+
+}, [user]);
 
   const handleSave = () => {
     if (!newGallery.nome.trim()) {
@@ -26,27 +31,28 @@ const MyGallery = () => {
       return;
     }
 
-    const galleryToSend = {
-      nome: newGallery.nome,
-      descricao: newGallery.descricao,
-      data_criacao: new Date().toISOString(),
-      usuario_id: 1,
-      is_public: newGallery.isPublic
-    };
+   
 
-    fetch("http://localhost:8080/galerias", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(galleryToSend)
-    })
-      .then((res) => res.json())
-      .then((savedGallery) => {
-        setGalerias([...galerias, savedGallery]);
-        setNewGallery({ nome: "", descricao: "", isPublic: false });
-        setShowModal(false);
-      })
-      .catch((err) => console.error(err));
-  };
+const galleryToSend = {
+  nome: newGallery.nome,
+  descricao: newGallery.descricao,
+  usuarioId: Number(user.id)
+};
+console.log(JSON.stringify(galleryToSend, null, 2));
+
+   fetch(`http://localhost:8080/galerias/usuarios/${user.id}`, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(galleryToSend)
+})  
+  .then((res) => res.json())
+  .then((savedGallery) => {
+    setGalerias([...galerias, savedGallery]);
+    setNewGallery({ nome: "", descricao: "" });
+    setShowModal(false);
+  })
+  .catch((err) => console.error(err));
+}
 
   return (
     <div className="gallery-section">
@@ -73,10 +79,6 @@ const MyGallery = () => {
               <p className="folder-desc">
                 {g.descricao || "Nenhuma descrição adicionada."}
               </p>
-              <div className="folder-status">
-                <span>{g.is_public ? "🌍" : "🔒"}</span>
-                {g.is_public ? "Pública" : "Privada"}
-              </div>
             </div>
           </div>
         ))}
@@ -84,41 +86,40 @@ const MyGallery = () => {
 
       {showModal && (
         <div className="modal-overlay">
-          <div className="modal-content">
-            <h3>Criar Nova Galeria</h3>
+        <div className="modal-content">
+  <div className="modal-header">
+    <h3>Criar Nova Galeria</h3>
 
-            <input
-              type="text"
-              placeholder="Nome da Galeria *"
-              value={newGallery.nome}
-              onChange={(e) => setNewGallery({ ...newGallery, nome: e.target.value })}
-            />
+    <div className="modal-header-actions">
+      <button className="cancel-btn" onClick={() => setShowModal(false)}>
+        Cancelar
+      </button>
+      <button className="confirm-btn" onClick={handleSave}>
+        Criar Galeria
+      </button>
+    </div>
+  </div>
 
-            <textarea
-              placeholder="Descrição (opcional)"
-              value={newGallery.descricao}
-              onChange={(e) => setNewGallery({ ...newGallery, descricao: e.target.value })}
-            />
+  <div className="modal-body">
+    <input
+      type="text"
+      placeholder="Nome da Galeria *"
+      value={newGallery.nome}
+      onChange={(e) =>
+        setNewGallery({ ...newGallery, nome: e.target.value })
+      }
+    />
 
-            <label className="checkbox">
-              <input
-                type="checkbox"
-                checked={newGallery.isPublic}
-                onChange={(e) => setNewGallery({ ...newGallery, isPublic: e.target.checked })}
-              />
-              Tornar pública
-            </label>
-
-            <div className="modal-actions">
-              <button className="cancel-btn" onClick={() => setShowModal(false)}>
-                Cancelar
-              </button>
-              <button className="confirm-btn" onClick={handleSave}>
-                Criar Galeria
-              </button>
-            </div>
-          </div>
-        </div>
+    <textarea
+      placeholder="Descrição (opcional)"
+      value={newGallery.descricao}
+      onChange={(e) =>
+        setNewGallery({ ...newGallery, descricao: e.target.value })
+      }
+    />
+  </div>
+</div>
+</div>
       )}
     </div>
   );

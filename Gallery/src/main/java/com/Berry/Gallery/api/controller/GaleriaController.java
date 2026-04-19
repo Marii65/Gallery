@@ -35,10 +35,13 @@ public class GaleriaController {
         return galeriaService.listarTodas();
     }
 
-    @PostMapping
+    @PostMapping("/usuarios/{userId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public GaleriaOutputDTO adicionar(@RequestBody GaleriaInputDTO dto) {
-        return galeriaService.salvar(dto);
+    public GaleriaOutputDTO adicionar(
+            @PathVariable Long userId,
+            @RequestBody GaleriaInputDTO dto
+    ) {
+        return galeriaService.salvar(userId, dto);
     }
 
     @PutMapping("/{galeriaId}")

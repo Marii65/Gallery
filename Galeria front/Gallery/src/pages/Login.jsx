@@ -62,7 +62,7 @@ export default function Login() {
     switch (r) {
 
       case "user":
-        navigate("/usuario");
+        navigate("/artista");
         break;
 
       case "artista":

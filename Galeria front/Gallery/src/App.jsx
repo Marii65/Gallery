@@ -16,6 +16,8 @@ import { AuthProvider } from "./context/AuthContext";
 import MyGallery from "./components/MyGallery";
 import Galeria from "./pages/Galeria";
 
+import ArtistProfile from "./pages/ArtistProfile";
+
 export default function App() {
   return (
     <AuthProvider>
@@ -28,6 +30,7 @@ export default function App() {
         <Route path="/usuario" element={<Usuario />} />
         <Route path="/login" element={<Login />} />
         <Route path="/post/:id" element={<Post />} />
+        <Route path="/perfil/:id" element={<ArtistProfile />} />
 
         {/* ÁREA DO ARTISTA */}
         <Route path="/artista" element={<Artista />}>

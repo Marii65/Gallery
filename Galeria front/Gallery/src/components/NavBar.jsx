@@ -37,7 +37,7 @@ export default function Navbar() {
     navigate("/artista");
   } 
   else if(role === "USER"){
-    navigate("/usuario");
+    navigate("/artista");
   } 
   else {
     navigate("/perfil");

@@ -8,7 +8,9 @@ import com.Berry.Gallery.domain.model.Usuario;
 import com.Berry.Gallery.domain.repository.GaleriaRepository;
 import com.Berry.Gallery.domain.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -45,12 +47,10 @@ public class GaleriaService {
         return toDTO(galeria);
     }
 
-    public GaleriaOutputDTO salvar(GaleriaInputDTO dto) {
+    public GaleriaOutputDTO salvar(Long userId, GaleriaInputDTO dto) {
 
-        Usuario usuario = usuarioRepository.findById(dto.getUsuarioId())
-                .orElseThrow(() ->
-                        new EntidadeNaoEncontradaException("Usuário não encontrado")
-                );
+        Usuario usuario = usuarioRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
         Galeria galeria = new Galeria();
         galeria.setNome(dto.getNome());
@@ -82,7 +82,6 @@ public class GaleriaService {
         dto.setId(galeria.getId());
         dto.setNome(galeria.getNome());
         dto.setDescricao(galeria.getDescricao());
-        dto.setUsuarioId(galeria.getUsuario().getId());
         dto.setNomeUsuario(galeria.getUsuario().getNome());
         return dto;
     }

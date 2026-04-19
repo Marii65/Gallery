@@ -1,12 +1,17 @@
 .posts-container {
+  padding: 40px; 
   width: 100%;
+  box-sizing: border-box; 
+  background-color: #ffeaf2; 
+  min-height: 100vh;
+  border-radius: 20px; 
 }
 
 .posts-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 25px;
+  margin-bottom: 30px; /* Padronizado: alterado de 25px para 30px */
 }
 
 .posts-title {
@@ -19,21 +24,22 @@
   background-color: #2d0320;
   color: white;
   border: none;
-  padding: 10px 25px;
-  border-radius: 4px;
+  padding: 10px 20px; /* Padronizado com o botão OC */
+  border-radius: 8px; /* Padronizado: alterado de 4px para 8px */
   font-weight: bold;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px; /* Padronizado: alterado de 15px para 10px */
   font-size: 1rem;
+  margin-right: 50px;
 }
 
 /* Grade de Posts */
 .posts-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 colunas como na imagem */
-  gap: 20px;
+  grid-template-columns: repeat(4, 1fr); /* 4 colunas mantidas */
+  gap: 20px; /* Padronizado */
 }
 
 .post-card {
@@ -43,14 +49,14 @@
 }
 
 .post-card:hover {
-  transform: scale(1.02);
+  transform: scale(1.05); /* Padronizado: efeito igual ao card de OC */
 }
 
 .post-image, .post-placeholder {
   width: 100%;
   height: 100%;
   background-color: #f7c8da; /* Rosa médio */
-  border-radius: 4px;
+  border-radius: 12px; /* Padronizado: arredondamento igual ao card de OC */
   overflow: hidden;
 }
 
