@@ -80,6 +80,11 @@ galeria-de-artes
 
 ## ⚙️ Como Executar o Projeto
 
+### Banco de Dados
+```bash
+Inicie o serviço MySQL (Recomendação: Xampp)
+```
+
 ### Backend
 
 ```bash
